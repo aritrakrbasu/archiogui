@@ -1,4 +1,4 @@
 bing-image-downloader
 pandas
 openpyxl
-
+git+git://github.com/Joeclinton1/google-images-download
