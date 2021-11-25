@@ -1,0 +1,34 @@
+.styledRememberMe
+{
+    color:white !important
+}
+.style4ForgetPwd
+{
+    color:white ;
+    text-decoration:none !important;
+    margin-left: auto;
+    text-align:right;
+}
+.colShift
+{
+    text-align:right;
+    
+}
+.rowShift
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.styledInput
+{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.textheader
+{
+    margin-bottom: 30px;
+}
+.largebtn
+{
+    color: white
+}
