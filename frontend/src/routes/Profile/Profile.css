@@ -1,0 +1,30 @@
+.pageWrap {
+    padding: 20px 40px;
+}
+.pageHeadingText {
+    width: fit-content;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .pageHeadingText::after {
+    content: attr(data);
+    color: transparent;
+    display: inline-block;
+    height: 50px;
+    position: absolute;
+    left: 0;
+    background-image: url(underline.png);
+    font-size: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom;
+    top: 0px;
+    padding-left: 12px;
+    padding-right: 20px;
+  }
+  
+  .pageHeadingTextContainer {
+    position: relative;
+  }
+  

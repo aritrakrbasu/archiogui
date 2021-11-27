@@ -1,0 +1,22 @@
+.pageWrap {
+    padding: 20px 40px;
+}
+
+.navbarItemStyle li {
+    list-style: none;
+    margin-right: 10px;
+}
+
+.navbarItemStyle {
+    display: flex;
+}
+
+.navbarItemStyle li span {
+    padding-right: 10px;
+    border-right: 1px solid black;
+}
+
+.placeName:hover {
+    /* background-color: #87AAAA; */
+    background-color: #CEE5D0;
+}

@@ -1,11 +1,11 @@
 import React from 'react'
-import './Login.css'
+import './Forgetpwd.css'
 import {Col, Form, Row, } from 'react-bootstrap'
 import user from './user.png'
 import logoLarge from './logoLarge.png'
 import logoSmall from './logoSmall.png'
 import Button from '@restart/ui/esm/Button'
-function Login() {
+function Forgetpwd() {
     return (
        <div className="signupContainer">
            <div className="signupContainerOverlay">
@@ -17,7 +17,7 @@ function Login() {
                        <div className="leftContainerInner">
 
                         <h1 className="textheader">
-                                Time to Login <span></span>
+                                Forgot Password <span></span>
                         </h1>
                         
                             <Form>
@@ -27,23 +27,13 @@ function Login() {
                                         <Form.Control type="email" placeholder="Enter email" className="styledInput" />
                                     </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        
-                                        <Form.Control type="password" placeholder="Password" className="styledInput"/>
-                                    </Form.Group>
-                                    <Row className="rowShift">
-                                        <Col>
-                                            <Form.Check type="checkbox" label="Remember me" className="styledRememberMe" />
-                                        </Col>
-                                        <Col className="colShift">
-                                            <a href="" className="style4ForgetPwd" > Forget Password? </a > 
-                                        </Col>
-                                    </Row>
+                                    
+                                    
                                     <Button variant="primary" className="smallbtn" type="submit">
-                                        Signup 
+                                        Login 
                                     </Button>
                                     <Button variant="primary" className="largebtn" type="submit">
-                                        Login Now
+                                        Reset Password
                                     </Button>
                             </Form>
                             </div>
@@ -57,4 +47,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Forgetpwd
