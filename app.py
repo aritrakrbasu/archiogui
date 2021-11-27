@@ -15,7 +15,7 @@ firebase_admin.initialize_app(cred)
 
 # Initialize firestore database
 db = firestore.client()
-
+print(serviceaccount)
 # App routes
 @app.route('/')
 def index():
