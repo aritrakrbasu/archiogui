@@ -8,7 +8,6 @@ from assets.creds import serviceaccount
 # Initialize flask app
 app = Flask(__name__)
 
-port = int(os.environ.get("PORT", 5000))
 
 # Initialize firestore
 cred = credentials.Certificate(serviceaccount)
@@ -18,7 +17,10 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # App routes
-
+@app.route('/')
+def index():
+  return "<h1>Welcome to CodingX</h1>"
+  
 @app.route("/findplace", methods=["POST"] )
 def findPlace():
     return jsonify({
@@ -37,4 +39,4 @@ def getallplaces():
     if doc.exists:
         return jsonify(doc.to_dict())
 if __name__ == '__main__':
-    app.run(port=port)
+    app.run()
