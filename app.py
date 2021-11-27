@@ -18,11 +18,6 @@ db = firestore.client()
 
 # App routes
 
-
-@app.route("/", methods=["GET"] )
-
-    return jsonify({"test":"hi"})
-
 @app.route("/findplace", methods=["POST"] )
 def findPlace():
     return jsonify({
