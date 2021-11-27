@@ -3,10 +3,12 @@ from flask import Flask , jsonify
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from flask_cors import CORS
 
 
 # Initialize flask app
 app = Flask(__name__)
+CORS(app)
 
 
 # Initialize firestore
@@ -38,5 +40,5 @@ def getallplaces():
     doc = places_ref.get()
     if doc.exists:
         response = jsonify(doc.to_dict())
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
+    
