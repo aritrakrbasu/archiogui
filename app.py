@@ -3,14 +3,14 @@ from flask import Flask , jsonify
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-from creds import serviceaccount
+
 
 # Initialize flask app
 app = Flask(__name__)
 
 
 # Initialize firestore
-cred = credentials.Certificate(serviceAccountKey.json)
+cred = credentials.Certificate("serviceAccountKey.json")
 # firebase_admin.initialize_app(cred)
 
 # Initialize firestore database
