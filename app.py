@@ -8,6 +8,7 @@ from assets.creds import serviceaccount
 # Initialize flask app
 app = Flask(__name__)
 
+port = int(os.environ.get("PORT", 5000))
 
 # Initialize firestore
 cred = credentials.Certificate(serviceaccount)
@@ -36,4 +37,4 @@ def getallplaces():
     if doc.exists:
         return jsonify(doc.to_dict())
 if __name__ == '__main__':
-    app.run()
+    app.run(port=port)
