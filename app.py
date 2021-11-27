@@ -35,6 +35,7 @@ def findPlace():
         'accuracy': 90})
 
 @app.route("/getallplaces", methods=["GET"] )
+@cross_origin()
 def getallplaces():
     places_ref = db.collection(u'places').document(u'all_places')
     doc = places_ref.get()
