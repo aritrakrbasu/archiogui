@@ -1,4 +1,5 @@
 from google_images_download import google_images_download
+from selenium import webdriver
 import pandas as pd
 import os
 
@@ -19,12 +20,13 @@ def renameImages(place):
         os.rename(src, dst)
 
 
-sheet_name = '' #Update sheet name
+sheet_name = 'france' #Update sheet name
 file_name = 'records.xlsx'
 df = pd.read_excel(file_name, sheet_name=sheet_name)
 place_names = df.name_en.tolist()
 
 for place in place_names:
+    driver = webdriver.Chrome('C:\Program Files (x86)\Chromedriver\chromedriver.exe') 
     current_dir = [{
         "name": 'Train',
         "lim": 200
@@ -37,10 +39,13 @@ for place in place_names:
     except:
         print("Already exists")
     for dir in current_dir:
-        os.mkdir("Dataset/" + dir['name'] + "/" + place)
+        try:
+            os.mkdir("Dataset/" + dir['name'] + "/" + place)
+        except: 
+            pass
     index = 0
     lim = 300
-    arguments = {"keywords": place, "limit": lim, "print_urls": True, "format": "jpg"}
+    arguments = {"keywords": place, "limit": lim, "print_urls": True, "format": "jpg", "chromedriver": "C:\Program Files (x86)\Chromedriver\chromedriver.exe"}
     absolute_image_paths = response.download(arguments)
     renameImages(place)
     # downloader.download(place, limit=lim,  output_dir='Dataset/Download', adult_filter_off=True, force_replace=False, timeout=60)
