@@ -22,16 +22,13 @@ function Signup() {
                         <img src={user} className="userIcon"/>
                             <Form>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label className="styledLabel">Name</Form.Label>
                                         <Form.Control type="text" placeholder="Name" className="styledInput" />
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label className="styledLabel">Email address</Form.Label>
                                         <Form.Control type="email" placeholder="Enter email" className="styledInput" />
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label className="styledLabel">Password</Form.Label>
                                         <Form.Control type="password" placeholder="Password" className="styledInput"/>
                                     </Form.Group>
                                     <Button variant="primary" className="smallbtn" type="submit">

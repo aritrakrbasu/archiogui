@@ -1,0 +1,153 @@
+.navbarStyle {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+}
+.navbarStyle li {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.navbarStyle li span {
+  padding-right: 10px;
+  border-right: 1px solid #000;
+}
+.navbarStyle li img {
+  height: 30px;
+}
+
+.headerImageContainer {
+  height: 100%;
+}
+
+.imageHolder {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imageHolder img {
+  border-radius: 30px !important;
+  height: 107px;
+  width: 107px;
+}
+
+.profileContainer {
+  margin-top: 20px;
+}
+
+.welcomeTextContainer p {
+  font-size: 16px;
+  font-weight: 300;
+}
+.welcomeText {
+  font-size: 30px;
+}
+.welcomeText span {
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.welcomeTextContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pageHeadingText {
+  width: fit-content;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.pageHeadingText::after {
+  content: attr(data);
+  color: transparent;
+  display: inline-block;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  background-image: url(underline.png);
+  font-size: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  top: 0px;
+  padding-left: 12px;
+  padding-right: 20px;
+}
+
+.pageHeadingTextContainer {
+  position: relative;
+}
+
+.placeItem {
+  height: 216px;
+  border-radius: 18px !important;
+  overflow: hidden;
+  width: 156px;
+  background-position: center;
+  background-size: cover;
+  padding: 0;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+}
+.placeNameHolder {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 94.91%);
+  color: #fff;
+  font-size: 18px;
+  line-height: 21.09px;
+  padding-bottom: 10px;
+  transition: all 1000ms linear;
+}
+
+.placeItem:hover {
+  transform: scale(1.03);
+}
+.placeNameHolder:hover {
+  opacity: 0.7;
+}
+.placeItemHolder {
+  height: 247px;
+  width: 328px;
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.placeItemName {
+  background: linear-gradient(360deg, #000000 15%, rgba(0, 0, 0, 0) 100%);
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: 10px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+  padding-left: 10px;
+  flex-direction: column;
+  transition: all 500ms linear;
+}
+
+.placeItemLocation {
+  font-size: 16px;
+}
+
+/* .placeItemHolder:hover {
+  transform: scale(1.03);
+} */
+.placeItemName:hover {
+  opacity: 0.7;
+}

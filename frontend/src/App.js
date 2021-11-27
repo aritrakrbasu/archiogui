@@ -5,10 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './routes/Signup/Signup';
 import Login from './routes/Login/Login';
 import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
+import Dashboard from './routes/Dashboard/Dashboard';
 function App() {
   return (
     
-    <Forgetpwd />
+    <Dashboard />
   );
 }
 
