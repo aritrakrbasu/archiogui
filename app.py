@@ -37,4 +37,6 @@ def getallplaces():
     places_ref = db.collection(u'places').document(u'all_places')
     doc = places_ref.get()
     if doc.exists:
-        return jsonify(doc.to_dict())
+        var response = jsonify(doc.to_dict())
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return jsonify())
