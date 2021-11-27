@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 # Initialize firestore
-# cred = credentials.Certificate(serviceaccount)
+cred = credentials.Certificate(serviceAccountKey.json)
 # firebase_admin.initialize_app(cred)
 
 # Initialize firestore database
