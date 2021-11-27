@@ -8,7 +8,9 @@ from flask_cors import CORS,cross_origin
 
 # Initialize flask app
 app = Flask(__name__)
-CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/getallplaces": {"origins": "*"}})
+
 
 
 # Initialize firestore
@@ -35,7 +37,7 @@ def findPlace():
         'accuracy': 90})
 
 @app.route("/getallplaces", methods=["GET"] )
-@cross_origin()
+@cross_origin(origin='*',headers=['Content- Type','Authorization'])
 def getallplaces():
     places_ref = db.collection(u'places').document(u'all_places')
     doc = places_ref.get()
