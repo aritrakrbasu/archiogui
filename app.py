@@ -1,9 +1,9 @@
 # Import files
 from flask import Flask , jsonify
-# import firebase_admin
-# from firebase_admin import credentials
-# from firebase_admin import firestore
-# from creds import serviceaccount
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from creds import serviceaccount
 
 # Initialize flask app
 app = Flask(__name__)
