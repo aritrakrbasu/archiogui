@@ -19,7 +19,7 @@ def renameImages(place):
         os.rename(src, dst)
 
 
-sheet_name = 'SoH' #Update sheet name
+sheet_name = '' #Update sheet name
 file_name = 'records.xlsx'
 df = pd.read_excel(file_name, sheet_name=sheet_name)
 place_names = df.name_en.tolist()
