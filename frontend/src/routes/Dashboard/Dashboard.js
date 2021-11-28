@@ -11,67 +11,30 @@ import axios from 'axios'
 function Dashboard() {
     const [placeDetails, setplaceDetails] = useState([])
     const [popularPlaces, setpopularPlaces] = useState([]) 
-    var data =[
-        {
-            image : "https://images.indianexpress.com/2018/06/red-fort-759-getty-images.jpg",
-            place_name : "Red Fort",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        }, 
-    ]
+
     useEffect(() => {
-       axios.get("https://archiogui.herokuapp.com/getallplaces").then(data=>{
+        axios.get("https://archiogui.herokuapp.com/getallplaces").then(data=>{
            if(data.status===200) {
-                setplaceDetails(data.data.places)
-              
+                var places = data.data.places
+                setplaceDetails(places)
            }
        })
-        
     }, [])
-    useEffect (()=>{
-        selectRandomPlaces()
-    },[placeDetails])
-    function selectRandomPlaces () {
-        var dupPlaceDetails = placeDetails
-        var randomPlaces = []
-        for(let i=0;i<8;i++) {
-            var randomNumber = Math.floor(Math.random()*dupPlaceDetails.length)
-            randomPlaces.push(dupPlaceDetails[randomNumber])
-            dupPlaceDetails.splice(randomNumber,1)
-        }
-        console.log(randomPlaces)
-        setpopularPlaces(randomPlaces)
-    }
+
+    useEffect(() => {
+            var dupPlaceDetails = [...placeDetails]
+            var randomPlaces = []
+            var count = placeDetails.length > 8 ?8 : placeDetails.length
+            for(let i=0;i<count;i++) {
+                console.log(dupPlaceDetails.length)
+                var randomNumber = Math.floor(Math.random()*dupPlaceDetails.length)
+                randomPlaces.push(dupPlaceDetails[randomNumber])
+                dupPlaceDetails.splice(randomNumber,1)
+            }
+            
+            setpopularPlaces(randomPlaces)
+    }, [placeDetails])
+    
     return (
         <>
         <Row className="pageWrap">
@@ -85,14 +48,14 @@ function Dashboard() {
             <ProfileShort/>
             <PageHeader text={"Popular Places"} />
            { popularPlaces && popularPlaces.length > 0 && popularPlaces.map((place)=>{
-               return(<PopularPlacesItem image={place?.image} place_name ={place?.name}/>)
+               return(<PopularPlacesItem image={place?.image} place_name ={place?.place_name}/>)
            })
                
            }
             <PageHeader text={"Other Places"}/>
             {
                 placeDetails && placeDetails.length > 0 && placeDetails.map((place)=>{
-                    return(<PlaceItem image={place.image} place_name={place.name} location ={place.location} /> )
+                    return(<PlaceItem image={place.image} place_name={place.place_name} location ={place.state} /> )
                 })
             }
         </Row>
