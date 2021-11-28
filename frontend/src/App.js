@@ -6,8 +6,11 @@ import Signup from './routes/Signup/Signup';
 import Login from './routes/Login/Login';
 import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
 import Dashboard from './routes/Dashboard/Dashboard';
+import Explore from './routes/Explore/Explore';
+import Profile from './routes/Profile/Profile';
 function App() {
   return (
+    
     
     <Dashboard />
   );

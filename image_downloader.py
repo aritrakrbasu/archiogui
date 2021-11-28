@@ -8,19 +8,22 @@ response = google_images_download.googleimagesdownload()
 def moveImages(st, end, dir, place):
     currentDirImageIndex = 1
     for i in range(st, end):
-        os.rename("Dataset/Download/" + place + "/Image_"+ str(i+1) + ".jpg", "Dataset/"+ dir +  "/" + place + '/Image_'+ str(currentDirImageIndex) + ".jpg")
-        currentDirImageIndex += 1
+        try:
+            os.rename("Dataset/Download/" + place + "/Image_"+ str(i+1) + ".jpg", "Dataset/"+ dir +  "/" + place + '/Image_'+ str(currentDirImageIndex) + ".jpg")
+            currentDirImageIndex += 1
+        except:
+            pass
 
 def renameImages(place):
     for count, filename in enumerate(os.listdir("downloads/" + place)):
         dst = "Image_" + str(count+1) + ".jpg"
         src = "downloads/" + place + "/" + filename
         dst = "Dataset/Download/" + place + "/" + dst
-
         os.rename(src, dst)
+        print("RENAMING", dst)
 
 
-sheet_name = 'france' #Update sheet name
+sheet_name = 'italy' #Update sheet name
 file_name = 'records.xlsx'
 df = pd.read_excel(file_name, sheet_name=sheet_name)
 place_names = df.name_en.tolist()
@@ -44,7 +47,7 @@ for place in place_names:
         except: 
             pass
     index = 0
-    lim = 300
+    lim = 320
     arguments = {"keywords": place, "limit": lim, "print_urls": True, "format": "jpg", "chromedriver": "C:\Program Files (x86)\Chromedriver\chromedriver.exe"}
     absolute_image_paths = response.download(arguments)
     renameImages(place)
@@ -57,4 +60,7 @@ for place in place_names:
         moveImages(start, start + current_dir[index]['lim'], current_dir[index]['name'], place)
         start += current_dir[index]['lim']
 
-    os.rmdir('Dataset/Download/' + place)
+    try:
+        os.rmdir('Dataset/Download/' + place)
+    except:
+        pass

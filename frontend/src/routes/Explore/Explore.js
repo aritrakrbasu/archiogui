@@ -1,16 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import Header from '../../Components/Header'
 import Navbar from '../../Components/Navbar'
 import PageHeader from '../../Components/PageHeader'
-import PlaceItem from '../../Components/PlaceItem'
-import PopularPlacesItem from '../../Components/PopularPlacesItem'
 import ProfileShort from '../../Components/ProfileShort'
-import './Dashboard.css'
-import axios from 'axios'
-function Dashboard() {
-    const [placeDetails, setplaceDetails] = useState([])
-    const [popularPlaces, setpopularPlaces] = useState([]) 
+import PlaceItem from '../../Components/PlaceItem'
+
+import './Explore.css'
+
+function Explore() {
     var data =[
         {
             image : "https://images.indianexpress.com/2018/06/red-fort-759-getty-images.jpg",
@@ -49,55 +47,67 @@ function Dashboard() {
             location:"New Delhi"
         }, 
     ]
-    useEffect(() => {
-       axios.get("https://archiogui.herokuapp.com/getallplaces").then(data=>{
-           if(data.status===200) {
-                setplaceDetails(data.data.places)
-              
-           }
-       })
-        
-    }, [])
-    useEffect (()=>{
-        selectRandomPlaces()
-    },[placeDetails])
-    function selectRandomPlaces () {
-        var dupPlaceDetails = placeDetails
-        var randomPlaces = []
-        for(let i=0;i<8;i++) {
-            var randomNumber = Math.floor(Math.random()*dupPlaceDetails.length)
-            randomPlaces.push(dupPlaceDetails[randomNumber])
-            dupPlaceDetails.splice(randomNumber,1)
-        }
-        console.log(randomPlaces)
-        setpopularPlaces(randomPlaces)
-    }
+    var nameOfPlace = [
+            {location_name: "INDIA"},
+            {location_name: "CHINA"},
+            {location_name: "JAPAN"},
+            {location_name: "AUSTRALIA"},
+            {location_name: "SOUTH KOREA"},
+            {location_name: "SRI LANKA"},
+            {location_name: "EUROPE"},
+            {location_name: "GERMANY"},
+            {location_name: "BRAZIL"},
+            {location_name: "BANGLADESH"},
+            {location_name: "BHUTAN"},
+            {location_name: "CHILE"},
+            {location_name: "CAMBODIA"},
+    ]
     return (
         <>
-        <Row className="pageWrap">
+            <Row className = "pageWrap">
                 <Col>
-                    <Header/>
+                    <Header />
                 </Col>
+
                 <Col>
                     <Navbar />
                 </Col>
+                <ProfileShort />
+                <PageHeader text={"LETS GET EXPLORING"} />
+                <ul className = "navbarItemStyle">
+    
+                {
+                    nameOfPlace && nameOfPlace.length > 0 && nameOfPlace.map((loc, key)=>{
+                        if(key==nameOfPlace.length-1) {
+                            return ( 
+                        
+                                <li className="placeName"> {loc.location_name}</li>
+                     
+                         )
+                        }
+                        else {
+                            return ( 
+                        
+                                <li className="placeName"> <span>{loc.location_name}</span></li>
+                     
+                        )
+                        }
+                      
+                    })
+                }
 
-            <ProfileShort/>
-            <PageHeader text={"Popular Places"} />
-           { popularPlaces && popularPlaces.length > 0 && popularPlaces.map((place)=>{
-               return(<PopularPlacesItem image={place?.image} place_name ={place?.name}/>)
-           })
-               
-           }
-            <PageHeader text={"Other Places"}/>
-            {
-                placeDetails && placeDetails.length > 0 && placeDetails.map((place)=>{
-                    return(<PlaceItem image={place.image} place_name={place.name} location ={place.location} /> )
-                })
-            }
-        </Row>
+                </ul>
+                
+                {
+                    data && data.length > 0 && data.map((place)=>{
+                        return(<PlaceItem image={place.image} place_name={place.place_name} location ={place.location} />)
+                    })
+                }
+
+            </Row>
+        
         </>
     )
 }
 
-export default Dashboard
+export default Explore
