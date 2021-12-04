@@ -1,3 +1,7 @@
 .pageWrap {
   padding: 20px 40px;
 }
+.row:before,
+.row:after {
+  display: inline-block;
+}

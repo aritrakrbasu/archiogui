@@ -3,25 +3,27 @@ from flask import Flask , jsonify
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-from assets.creds import serviceaccount
+from flask_cors import CORS,cross_origin
+
 
 # Initialize flask app
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/getallplaces": {"origins": "*"}})
+
 
 
 # Initialize firestore
-cred = credentials.Certificate(serviceaccount)
+cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 # Initialize firestore database
 db = firestore.client()
 
 # App routes
-
-
-@app.route("/", methods=["GET"] )
-
-    return jsonify({"test":"hi"})
+@app.route('/')
+def index():
+  return "<h1>Welcome to Archiogui</h1>"
 
 @app.route("/findplace", methods=["POST"] )
 def findPlace():
@@ -35,10 +37,11 @@ def findPlace():
         'accuracy': 90})
 
 @app.route("/getallplaces", methods=["GET"] )
+@cross_origin(origin='*',headers=['Content- Type','Authorization'])
 def getallplaces():
     places_ref = db.collection(u'places').document(u'all_places')
     doc = places_ref.get()
     if doc.exists:
-        return jsonify(doc.to_dict())
-if __name__ == '__main__':
-    app.run()
+        response = jsonify(doc.to_dict())
+        return response
+    
