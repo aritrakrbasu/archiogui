@@ -3,3 +3,34 @@
 	background-position: center;
 	background-size: cover;
 }
+.headerPhotoContainer {
+	height: 100%;
+	background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	color: #fff;
+	padding: 20px;
+}
+
+.headerplaceDetailsContainer h2 {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.headerplaceDetailsContainer p {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.placeDetailsContainer {
+	margin-top: 20px;
+	text-align: justify;
+	font-size: 16px;
+	font-weight: 400;
+}
+.robotIcon {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -70px;
+}

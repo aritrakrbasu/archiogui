@@ -5,7 +5,9 @@ import user from './user.png'
 import logoLarge from './logoLarge.png'
 import logoSmall from './logoSmall.png'
 import Button from '@restart/ui/esm/Button'
+import { useNavigate } from 'react-router'
 function Login() {
+    const navigate = useNavigate();
     return (
        <div className="signupContainer">
            <div className="signupContainerOverlay">
@@ -39,7 +41,7 @@ function Login() {
                                             <a href="" className="style4ForgetPwd" > Forget Password? </a > 
                                         </Col>
                                     </Row>
-                                    <Button variant="primary" className="smallbtn" type="submit">
+                                    <Button variant="primary" className="smallbtn" onClick={()=>navigate('/signup')}>
                                         Signup 
                                     </Button>
                                     <Button variant="primary" className="largebtn" type="submit">
