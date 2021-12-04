@@ -9,60 +9,26 @@ import ProfileShort from '../../Components/ProfileShort'
 import './Dashboard.css'
 import axios from 'axios'
 function Dashboard() {
-    const [placeDetails, setplaceDetails] = useState([])
-    const [popularPlaces, setpopularPlaces] = useState([]) 
-    var data =[
-        {
-            image : "https://images.indianexpress.com/2018/06/red-fort-759-getty-images.jpg",
-            place_name : "Red Fort",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        }, 
-    ]
+    const [placeDetails, setplaceDetails] = useState(null)
+    const [popularPlaces, setpopularPlaces] = useState(null) 
+  
     useEffect(() => {
        axios.get("https://archiogui.herokuapp.com/getallplaces").then(data=>{
            if(data.status===200) {
+                let places = data.data.places
                 setplaceDetails(data.data.places)
-              
+                // selectRandomPlaces(places)
+                setTimeout(()=>{selectRandomPlaces(places)}, 1000)
            }
        })
         
     }, [])
-    useEffect (()=>{
-        selectRandomPlaces()
-    },[placeDetails])
-    function selectRandomPlaces () {
-        var dupPlaceDetails = placeDetails
+    // useEffect (()=>{
+    //     if(placeDetails.length>0)
+    //     selectRandomPlaces()
+    // },[placeDetails])
+    function selectRandomPlaces (places) {
+        let dupPlaceDetails = places
         var randomPlaces = []
         for(let i=0;i<8;i++) {
             var randomNumber = Math.floor(Math.random()*dupPlaceDetails.length)
@@ -72,6 +38,8 @@ function Dashboard() {
         console.log(randomPlaces)
         setpopularPlaces(randomPlaces)
     }
+    console.log(popularPlaces)
+    console.log(placeDetails)
     return (
         <>
         <Row className="pageWrap">
