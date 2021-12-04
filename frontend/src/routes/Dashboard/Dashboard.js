@@ -52,7 +52,13 @@ function Dashboard() {
            })
                
            }
+           
             <PageHeader text={"Other Places"}/>
+            {
+                placeDetails && placeDetails.length > 0 && placeDetails.map((place)=>{
+                    return(<PlaceItem image={place.image} place_name={place.place_name} location ={place.state} /> )
+                })
+            }
             {
                 placeDetails && placeDetails.length > 0 && placeDetails.map((place)=>{
                     return(<PlaceItem image={place.image} place_name={place.place_name} location ={place.state} /> )

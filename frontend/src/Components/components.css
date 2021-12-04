@@ -56,8 +56,6 @@
   flex-direction: column;
 }
 
-
-
 .pageHeadingText {
   width: fit-content;
   font-size: 30px;
@@ -120,7 +118,7 @@
 }
 .placeItemHolder {
   height: 247px;
-  width: 328px;
+  min-width: 328px;
   background-size: cover;
   background-position: center;
   padding: 0;
@@ -154,11 +152,10 @@
   opacity: 0.7;
 }
 
-.navbarItemStyle ul li  {
+.navbarItemStyle ul li {
   list-style: none;
 }
 
 .navbarItemStyle {
-display: flex;
+  display: flex;
 }
-
