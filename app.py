@@ -35,11 +35,11 @@ def getallplaces():
         return response
     
 
-@app.route("/findplace", methods=["POST"] )
-def findPlace():
-    if request.method == 'POST':
-      placename = request.json['placename']
-      doc_ref = db.collection(u'places').document(u'all_places')
-      doc = doc_ref.get()
-      if doc.exists:
-        return jsonify({doc.to_dict())
+@app.route("/findplace", methods=["GET"] )
+@cross_origin(origin='*',headers=['Content- Type','Authorization'])
+def findplace():
+    places_ref = db.collection(u'places').document(u'all_places')
+    doc = places_ref.get()
+    if doc.exists:
+        response = jsonify(doc.to_dict())
+        return response
