@@ -55,16 +55,19 @@ function Dashboard() {
 
 				<ProfileShort />
 				<PageHeader text={"Popular Places"} />
-				{popularPlaces &&
-					popularPlaces.length > 0 &&
-					popularPlaces.map((place) => {
-						return (
-							<PopularPlacesItem
-								image={place?.image}
-								place_name={place?.place_name}
-							/>
-						);
-					})}
+				
+				<div style={{display: 'flex', flexDirection: 'row'}}>
+					{popularPlaces &&
+						popularPlaces.length > 0 &&
+						popularPlaces.map((place) => {
+							return (
+								<PopularPlacesItem
+									image={place?.image}
+									place_name={place?.place_name}
+								/>
+							);
+						})}
+				</div>
 
 				<PageHeader text={"Other Places"} />
 				{placeDetails &&

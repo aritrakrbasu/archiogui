@@ -101,6 +101,13 @@
 	padding: 20px;
 }
 
+.imgInput {
+	opacity: 0;
+	height: 0;
+	z-index: -1;
+	display: none;
+}
+
 @media all and (max-width: 480px) {
 	.styledInput {
 		width: 100% !important;

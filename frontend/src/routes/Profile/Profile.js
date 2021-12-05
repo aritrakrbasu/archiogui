@@ -4,6 +4,7 @@ import Header from '../../Components/Header'
 import Navbar from '../../Components/Navbar'
 import PageHeader from '../../Components/PageHeader'
 import PlaceItem from '../../Components/PlaceItem'
+import ProfileShort from '../../Components/ProfileShort'
 
 function Profile() {
     var data = [
@@ -38,11 +39,8 @@ function Profile() {
                 <Navbar />
             </Col>
         </Row>
-        <Row className="profileContainer">
-            <Col className="welcomeTextContainer">
-                <h1 className="welcomeText"> <span>Hello</span> Aritra !</h1>
-                <p>The destination is not important the journey is</p>
-            </Col>
+        <Row>
+            <ProfileShort />
         </Row>
         <Row>
 

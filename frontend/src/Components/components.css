@@ -9,6 +9,7 @@
 	margin-right: 5px;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 }
 
 .navbarStyle li span {
@@ -29,8 +30,8 @@
 }
 
 .imageHolder img {
-	border-radius: 30px !important;
-	height: 107px;
+	border-radius: 20px !important;
+
 	width: 107px;
 }
 

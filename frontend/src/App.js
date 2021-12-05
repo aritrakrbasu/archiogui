@@ -1,28 +1,28 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Signup from './routes/Signup/Signup';
-import Login from './routes/Login/Login';
-import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
-import Dashboard from './routes/Dashboard/Dashboard';
-import Explore from './routes/Explore/Explore';
-import Profile from './routes/Profile/Profile';
-import DetailsPage from './routes/DetailsPage/DetailsPage';
-import { useAuth } from './Components/AuthProvider'
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
 import { Navigate } from 'react-router'
+import { useAuth } from './Components/AuthProvider'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from './routes/Signup/Signup';
+import Login from './routes/Login/Login';
+import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
 
 function App() {
+  const Explore = React.lazy(() => import('./routes/Explore/Explore'));
+  const Profile = React.lazy(() => import('./routes/Profile/Profile'));
+  const Dashboard = React.lazy(() => import('./routes/Dashboard/Dashboard'));
+  const DetailsPage = React.lazy(() => import('./routes/DetailsPage/DetailsPage'));
 
   const privateRoutes = [
-    {path: '/dashboard', element: <Dashboard/>}, 
-    {path: '/explore', element: <Explore/>}, 
-    {path: '/profile', element: <Profile />}, 
-    {path: '/place/:placename', element: <DetailsPage />}
+    {path: '/dashboard', element: <Suspense fallback={<div>Loading...</div>}><Dashboard/></Suspense>}, 
+    {path: '/explore', element: <Suspense fallback={<div>Loading...</div>}><Explore/></Suspense>}, 
+    {path: '/profile', element: <Suspense fallback={<div>Loading...</div>}><Profile /></Suspense>}, 
+    {path: '/place/:placename', element: <Suspense fallback={<div>Loading...</div>}><DetailsPage /></Suspense>}
   ]
 
   const {currentUser} = useAuth();
