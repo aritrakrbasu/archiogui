@@ -1,7 +1,15 @@
 .pageWrap {
-  padding: 20px 40px;
+	padding: 20px 40px;
 }
 .row:before,
 .row:after {
-  display: inline-block;
+	display: inline-block;
+}
+.popularPlacesContainer {
+	width: 100%;
+}
+.pageContainer {
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-left: 30px;
 }
