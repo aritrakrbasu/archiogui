@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import './Signup.css'
 import {Col, Form, Row, } from 'react-bootstrap'
 import user from './user.png'
@@ -15,6 +15,12 @@ function Signup() {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    useEffect(()=>{
+        if(currentUser && currentUser.userId){
+            navigate('/dashboard')
+        }
+    },[currentUser])
 
     return (
        <div className="signupContainer">
@@ -35,14 +41,14 @@ function Signup() {
                                 register(emailRef.current.value, passwordRef.current.value, nameRef.current.value)
                              }}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Control type="text" placeholder="Name" className="styledInput" ref={nameRef}/>
+                                        <Form.Control type="text" placeholder="Name" className="styledInput" ref={nameRef} required/>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Control type="email" placeholder="Enter email" className="styledInput" ref={emailRef}/>
+                                        <Form.Control type="email" placeholder="Enter email" className="styledInput" ref={emailRef} required/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Control type="password" placeholder="Password" className="styledInput" ref={passwordRef}/>
+                                        <Form.Control type="password" placeholder="Password" className="styledInput" ref={passwordRef} required/>
                                     </Form.Group>
                                     <Button variant="primary" className="smallbtn" onClick={()=>navigate('/login')}>
                                         Login

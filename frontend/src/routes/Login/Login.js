@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import './Login.css'
 import {Col, Form, Row, } from 'react-bootstrap'
 import user from './user.png'
@@ -6,8 +6,20 @@ import logoLarge from './logoLarge.png'
 import logoSmall from './logoSmall.png'
 import Button from '@restart/ui/esm/Button'
 import { useNavigate } from 'react-router'
+import { useAuth } from '../../Components/AuthProvider'
 function Login() {
     const navigate = useNavigate();
+    const {login, currentUser} = useAuth();
+
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    useEffect (() => {
+        if(currentUser && currentUser.userId) {
+            navigate('/dashboard')
+        }
+    }, [currentUser])
+
     return (
        <div className="signupContainer">
            <div className="signupContainerOverlay">
@@ -22,16 +34,19 @@ function Login() {
                                 Time to Login <span></span>
                         </h1>
                         
-                            <Form>
+                            <Form onSubmit={(e) => {
+                                e.preventDefault();
+                                login(emailRef.current.value, passwordRef.current.value);
+                            }}>
                                     
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         
-                                        <Form.Control type="email" placeholder="Enter email" className="styledInput" />
+                                        <Form.Control type="email" placeholder="Enter email" className="styledInput" ref={emailRef} required/>
                                     </Form.Group>
 
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         
-                                        <Form.Control type="password" placeholder="Password" className="styledInput"/>
+                                        <Form.Control type="password" placeholder="Password" className="styledInput" ref={passwordRef} required/>
                                     </Form.Group>
                                     <Row className="rowShift">
                                         <Col>
