@@ -7,6 +7,7 @@ import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
 import Dashboard from './routes/Dashboard/Dashboard';
 import Explore from './routes/Explore/Explore';
 import Profile from './routes/Profile/Profile';
+import DetailsPage from './routes/DetailsPage/DetailsPage';
 import { useAuth } from './Components/AuthProvider'
 import {
   BrowserRouter as Router,
@@ -20,7 +21,8 @@ function App() {
   const privateRoutes = [
     {path: '/dashboard', element: <Dashboard/>}, 
     {path: '/explore', element: <Explore/>}, 
-    {path: '/profile', element: <Profile />}
+    {path: '/profile', element: <Profile />}, 
+    {path: '/place/:placename', element: <DetailsPage />}
   ]
 
   const {currentUser} = useAuth();

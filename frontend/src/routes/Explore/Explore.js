@@ -1,113 +1,131 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap'
-import Header from '../../Components/Header'
-import Navbar from '../../Components/Navbar'
-import PageHeader from '../../Components/PageHeader'
-import ProfileShort from '../../Components/ProfileShort'
-import PlaceItem from '../../Components/PlaceItem'
-
-import './Explore.css'
+import React, { useState, useEffect } from "react";
+import { Col, Form, Row } from "react-bootstrap";
+import Header from "../../Components/Header";
+import Navbar from "../../Components/Navbar";
+import PageHeader from "../../Components/PageHeader";
+import ProfileShort from "../../Components/ProfileShort";
+import PlaceItem from "../../Components/PlaceItem";
+import NSF from "../../Components/NSF";
+import axios from "axios";
+import "./Explore.css";
 
 function Explore() {
-    var data =[
-        {
-            image : "https://images.indianexpress.com/2018/06/red-fort-759-getty-images.jpg",
-            place_name : "Red Fort",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },
-        {
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        },{
-            image : "https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg",
-            place_name : "Taj Mahal",
-            location:"New Delhi"
-        }, 
-    ]
-    var nameOfPlace = [
-            {location_name: "INDIA"},
-            {location_name: "CHINA"},
-            {location_name: "JAPAN"},
-            {location_name: "AUSTRALIA"},
-            {location_name: "SOUTH KOREA"},
-            {location_name: "SRI LANKA"},
-            {location_name: "EUROPE"},
-            {location_name: "GERMANY"},
-            {location_name: "BRAZIL"},
-            {location_name: "BANGLADESH"},
-            {location_name: "BHUTAN"},
-            {location_name: "CHILE"},
-            {location_name: "CAMBODIA"},
-    ]
-    return (
-        <>
-            <Row className = "pageWrap">
-                <Col>
-                    <Header />
-                </Col>
+	const [placeDetails, setplaceDetails] = useState([]);
+	const [filteredPlaces, setFilteredPlaces] = useState([]);
+	const [filterStateName, setFilterStateName] = useState([]);
+	useEffect(() => {
+		axios.get("https://archiogui.herokuapp.com/getallplaces").then((data) => {
+			if (data.status === 200) {
+				var places = data.data.places;
+				setplaceDetails(places);
+				setFilteredPlaces(places);
+				var nameOfPlace = [];
 
-                <Col>
-                    <Navbar />
-                </Col>
-                <ProfileShort />
-                <PageHeader text={"LETS GET EXPLORING"} />
-                <ul className = "navbarItemStyle">
-    
-                {
-                    nameOfPlace && nameOfPlace.length > 0 && nameOfPlace.map((loc, key)=>{
-                        if(key==nameOfPlace.length-1) {
-                            return ( 
-                        
-                                <li className="placeName"> {loc.location_name}</li>
-                     
-                         )
-                        }
-                        else {
-                            return ( 
-                        
-                                <li className="placeName"> <span>{loc.location_name}</span></li>
-                     
-                        )
-                        }
-                      
-                    })
-                }
+				places.forEach((place) => {
+					if (nameOfPlace.length > 0) {
+						if (!nameOfPlace.includes(place.state.trim()))
+							nameOfPlace.push(place.state.trim());
+					} else nameOfPlace.push(place.state.trim());
+				});
+				setFilterStateName(nameOfPlace);
+			}
+		});
+	}, []);
 
-                </ul>
-                
-                {
-                    data && data.length > 0 && data.map((place)=>{
-                        return(<PlaceItem image={place.image} place_name={place.place_name} location ={place.location} />)
-                    })
-                }
+	function filterList(e) {
+		var typedValue = e.target.value;
 
-            </Row>
-        
-        </>
-    )
+		var filteredlist = placeDetails.filter(
+			(place) =>
+				place?.place_name?.toLowerCase().includes(typedValue.toLowerCase()) ||
+				place?.state?.toLowerCase().includes(typedValue.toLowerCase()) ||
+				place?.cat?.toLowerCase().includes(typedValue.toLowerCase()) ||
+				place?.Region?.toLowerCase().includes(typedValue.toLowerCase())
+		);
+
+		setFilteredPlaces(filteredlist);
+	}
+
+	function sortListByState(stateName) {
+		console.log(stateName);
+		var filteredlist = placeDetails.filter((place) =>
+			place.state?.toLowerCase().includes(stateName.toLowerCase())
+		);
+		if (filteredlist.length > 0) setFilteredPlaces(filteredlist);
+	}
+	return (
+		<>
+			<Row className='pageWrap'>
+				<Col>
+					<Header />
+				</Col>
+
+				<Col>
+					<Navbar />
+				</Col>
+				<ProfileShort />
+				<PageHeader text={"Let's Explore"} />
+
+				<Form>
+					<Form.Group as={Row} className='mb-3' controlId='formHorizontalEmail'>
+						<Form.Label column sm={2}>
+							Search Now
+						</Form.Label>
+						<Col sm={10}>
+							<Form.Control
+								type='text'
+								placeholder='Type your destination'
+								className='searchField'
+								onChange={filterList}
+							/>
+						</Col>
+					</Form.Group>
+				</Form>
+
+				<ul className='navbarItemStyle'>
+					<li className='placeName' onClick={() => sortListByState("")}>
+						<span>All</span>
+					</li>
+					{filterStateName &&
+						filterStateName.length > 0 &&
+						filterStateName.map((loc, key) => {
+							if (key == filterStateName.length - 1) {
+								return (
+									<li
+										className='placeName'
+										onClick={() => sortListByState(loc)}>
+										{" "}
+										{loc}
+									</li>
+								);
+							} else {
+								return (
+									<li
+										className='placeName'
+										onClick={() => sortListByState(loc)}>
+										{" "}
+										<span>{loc}</span>
+									</li>
+								);
+							}
+						})}
+				</ul>
+
+				{filteredPlaces &&
+					filteredPlaces.length > 0 &&
+					filteredPlaces.map((place) => {
+						return (
+							<PlaceItem
+								image={place?.image}
+								place_name={place.place_name}
+								location={place.location}
+							/>
+						);
+					})}
+				{filteredPlaces.length === 0 && <NSF />}
+			</Row>
+		</>
+	);
 }
 
-export default Explore
+export default Explore;

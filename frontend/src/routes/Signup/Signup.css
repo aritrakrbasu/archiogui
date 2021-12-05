@@ -1,102 +1,120 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 .signupContainer {
-  background-image: url("https://c4.wallpaperflare.com/wallpaper/573/683/721/5bd024ca58dff-wallpaper-preview.jpg");
-  background-position: center;
-  background-size: cover;
-  min-height: 100vh;
+	background-image: url("https://c4.wallpaperflare.com/wallpaper/573/683/721/5bd024ca58dff-wallpaper-preview.jpg");
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
 }
 .signupContainerOverlay {
-  background: linear-gradient(
-    72.01deg,
-    #141313 53.99%,
-    rgba(40, 42, 57, 0.29) 127.23%
-  );
-  min-height: 100vh;
+	background: linear-gradient(
+		72.01deg,
+		#141313 53.99%,
+		rgba(40, 42, 57, 0.29) 127.23%
+	);
+	min-height: 100vh;
 }
 
 .textheader {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 48px;
-  color: #ffffff;
-  text-align: center;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 48px;
+	color: #ffffff;
+	text-align: center;
 }
 
 .userIcon {
-  margin: auto;
+	margin: auto;
 }
 
 .leftContainer {
-  display: flex;
-  align-items: center; /* horizontal */
-  justify-content: center; /* vertical */
-  flex-direction: column;
-  height: 85vh;
+	display: flex;
+	align-items: center; /* horizontal */
+	justify-content: center; /* vertical */
+	flex-direction: column;
+	height: 85vh;
 }
 
 .leftContainerInner {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .textheader span {
-  width: 16px;
-  height: 16px;
-  background: #13a7fb;
-  display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: #13a7fb;
+	display: inline-block;
 }
 
 .styledInput {
-  background: #201f1f !important;
-  border-radius: 50px;
-  outline: 0px solid transparent;
-  border: 0px solid transparent;
-  display: block;
-  width: 420px;
-  padding: 15px;
-  color: #ffffff !important;
+	background: #201f1f !important;
+	border-radius: 50px;
+	outline: 0px solid transparent;
+	border: 0px solid transparent;
+	display: block;
+	width: 420px;
+	padding: 15px;
+	color: #ffffff !important;
 }
 
 .styledLabel {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 .smallbtn {
-  background: #201f1f;
-  border-radius: 50px;
-  width: 112.5px;
-  height: 53px;
-  color: #ffffff;
-  outline: 0px solid transparent;
-  border: 0px solid transparent;
-  margin-top: 15px;
+	background: #201f1f;
+	border-radius: 50px;
+	width: 112.5px;
+	height: 53px;
+	color: #ffffff;
+	outline: 0px solid transparent;
+	border: 0px solid transparent;
+	margin-top: 15px;
 }
 
 .largebtn {
-  width: 206.25px;
-  height: 53px;
-  background: #13a7fb;
-  border-radius: 50px;
-  outline: 0px solid transparent;
-  border: 0px solid transparent;
-  float: right;
-  margin-top: 15px;
+	width: 206.25px;
+	height: 53px;
+	background: #13a7fb;
+	border-radius: 50px;
+	outline: 0px solid transparent;
+	border: 0px solid transparent;
+	float: right;
+	margin-top: 15px;
 }
 
 .rightContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .bigLogo {
-  mix-blend-mode: color-dodge;
-  opacity: 0.3;
+	mix-blend-mode: color-dodge;
+	opacity: 0.3;
 }
 
 .logoContainer {
-  padding: 20px;
+	padding: 20px;
+}
+
+@media all and (max-width: 480px) {
+	.styledInput {
+		width: 100% !important;
+	}
+	.largebtn {
+		width: 170px;
+	}
+	.textheader {
+		font-size: 38px;
+	}
+	.rightContainer {
+		position: absolute;
+	}
+	.bigLogo {
+		width: 50vh;
+	}
 }

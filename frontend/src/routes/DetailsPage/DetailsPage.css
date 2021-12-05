@@ -1,0 +1,161 @@
+.headerPhoto {
+	height: 50vh;
+	background-position: center;
+	background-size: cover;
+	z-index: 99999;
+}
+.headerPhotoContainer {
+	height: 100%;
+	background: linear-gradient(360deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	color: #fff;
+	padding: 20px;
+}
+
+.headerplaceDetailsContainer h2 {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.headerplaceDetailsContainer p {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.placeDetailsContainer {
+	margin-top: 20px;
+	text-align: justify;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 40px;
+}
+.robotIcon {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -70px;
+}
+.robotIco {
+	width: 150px !important;
+}
+.floatingRobotIcon {
+	width: 15vw !important;
+	max-width: 400px !important;
+	animation: fadeIn ease 2s;
+	-webkit-animation: fadeIn ease 2s;
+	-moz-animation: fadeIn ease 2s;
+	-o-animation: fadeIn ease 2s;
+	-ms-animation: fadeIn ease 2s;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.floatingIcon {
+	background-color: rgba(0, 0, 0, 0.8);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: flex-end;
+	/* justify-content: flex-start; */
+	position: fixed;
+	z-index: 1;
+}
+
+.scifi {
+	position: fixed;
+	z-index: 9999;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.robotBig {
+	width: 85vw;
+	max-width: 600px;
+	animation: fadeIn ease 4s;
+	-webkit-animation: fadeIn ease 4s;
+	-moz-animation: fadeIn ease 4s;
+	-o-animation: fadeIn ease 4s;
+	-ms-animation: fadeIn ease 4s;
+}
+.robotBg {
+	position: absolute;
+
+	z-index: -1;
+	height: 100px;
+	width: 180px;
+	background-size: contain !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-repeat: no-repeat !important;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
+	transform: rotate(-20deg);
+	bottom: 250px;
+	left: 50px;
+	padding-bottom: 50px;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-ms-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@media all and (max-width: 480px) {
+	.robotIcon {
+		margin-top: -40px;
+	}
+	.floatingRobotIcon {
+		width: 50vw !important;
+	}
+}

@@ -9,12 +9,12 @@ import { useAuth } from '../../Components/AuthProvider'
 import { useNavigate } from 'react-router'
 
 function Signup() {
-    const navigate = useNavigate();
-    const {register, currentUser} = useAuth();
+	const navigate = useNavigate();
+	const { register, currentUser } = useAuth();
 
-    const nameRef = useRef(null);
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
+	const nameRef = useRef(null);
+	const emailRef = useRef(null);
+	const passwordRef = useRef(null);
 
     useEffect(()=>{
         if(currentUser && currentUser.userId){
@@ -28,7 +28,7 @@ function Signup() {
            <div className="logoContainer">
                <img src={logoSmall} className="logoSmall" />
            </div>
-               <Row>
+               <Row noGutter className='m-0'>
                    <Col lg={6} className="leftContainer">
                        <div className="leftContainerInner">
 
@@ -68,4 +68,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Signup;

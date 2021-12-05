@@ -1,5 +1,5 @@
 # Import files
-from flask import Flask , jsonify
+from flask import Flask , jsonify,request
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -25,17 +25,6 @@ db = firestore.client()
 def index():
   return "<h1>Welcome to Archiogui</h1>"
 
-@app.route("/findplace", methods=["POST"] )
-def findPlace():
-    return jsonify({
-        'status-code' : 200,
-        'status' : 'success',
-        'Name' : 'Red Fort',
-        'Description':  'The Red Fort or Lal Qila is a historic fort in Old Delhi, Delhi in India that served as the main residence of the Mughal Emperors. Emperor Shah Jahan commissioned construction of the Red Fort on 12 May 1638, when he decided to shift his capital from Agra to Delhi.',
-        'image-link':'https://www.google.com/maps/uv?pb=!1s0x390cfce26ec085ef:0x441e32f4fa5002fb!3m1!7e115!4shttps://lh5.googleusercontent.com/p/AF1QipOl2cgrCDJNWMv9n0HWFZQ1284mzzTeiNGBeQMO%3Dw568-h320-k-no!5sred+fort+description+-+Google+Search!15zQ2dJZ0FRPT0&imagekey=!1e10!2sAF1QipOl2cgrCDJNWMv9n0HWFZQ1284mzzTeiNGBeQMO&hl=en&sa=X&ved=2ahUKEwjf8ZT--5r0AhWIIbcAHZoGCnsQoip6BAhWEAM',
-        'size': [10,20],
-        'accuracy': 90})
-
 @app.route("/getallplaces", methods=["GET"] )
 @cross_origin(origin='*',headers=['Content- Type','Authorization'])
 def getallplaces():
@@ -45,3 +34,27 @@ def getallplaces():
         response = jsonify(doc.to_dict())
         return response
     
+
+@app.route("/findplace", methods=["POST"] )
+@cross_origin(origin='*',headers=['Content- Type','Authorization'])
+def findplace():
+    places_ref = db.collection(u'places').document(u'all_places')
+    searched = request.json
+    doc = places_ref.get()
+    if doc.exists:
+        places = doc.to_dict()["places"]
+        desiredPlace={}
+        for place in places:
+            
+            if(searched['place_name'] in place["place_name"]):
+              desiredPlace = place
+              break
+        
+        if(bool(desiredPlace)):
+          response = jsonify(desiredPlace)
+          return response
+        else:
+          return "Record not found", 400
+
+if __name__ == "__main__":
+  app.run(debug=True)

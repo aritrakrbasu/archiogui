@@ -26,7 +26,7 @@ function Login() {
            <div className="logoContainer">
                <img src={logoSmall} className="logoSmall" />
            </div>
-               <Row>
+               <Row noGutter className='m-0'>
                    <Col lg={6} className="leftContainer">
                        <div className="leftContainerInner">
 
@@ -53,7 +53,10 @@ function Login() {
                                             <Form.Check type="checkbox" label="Remember me" className="styledRememberMe" />
                                         </Col>
                                         <Col className="colShift">
-                                            <a href="" className="style4ForgetPwd" > Forget Password? </a > 
+                                            <a href='' className='style4ForgetPwd text-white'>
+                                                {" "}
+                                                Forget Password?{" "}
+                                            </a>
                                         </Col>
                                     </Row>
                                     <Button variant="primary" className="smallbtn" onClick={()=>navigate('/signup')}>
@@ -71,7 +74,7 @@ function Login() {
                </Row>
            </div>
        </div>
-    )
+    );
 }
 
-export default Login
+export default Login;

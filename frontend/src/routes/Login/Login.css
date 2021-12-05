@@ -1,34 +1,37 @@
-.styledRememberMe
-{
-    color:white !important
+.styledRememberMe {
+	color: white !important;
 }
-.style4ForgetPwd
-{
-    color:white ;
-    text-decoration:none !important;
-    margin-left: auto;
-    text-align:right;
+.style4ForgetPwd {
+	color: white;
+	text-decoration: none !important;
+	margin-left: auto;
+	text-align: right;
 }
-.colShift
-{
-    text-align:right;
-    
+.colShift {
+	text-align: right;
 }
-.rowShift
-{
-    padding-left: 15px;
-    padding-right: 15px;
+.rowShift {
+	padding-left: 15px;
+	padding-right: 15px;
 }
-.styledInput
-{
-    margin-bottom: 20px;
-    margin-top: 20px;
+.styledInput {
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
-.textheader
-{
-    margin-bottom: 30px;
+.textheader {
+	margin-bottom: 30px;
 }
-.largebtn
-{
-    color: white
+.largebtn {
+	color: white;
+}
+@media all and (max-width: 480px) {
+	.rowShift {
+		display: flex;
+		flex-direction: column;
+	}
+	.colShift {
+		text-align: left;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
