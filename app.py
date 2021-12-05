@@ -46,7 +46,7 @@ def findplace():
         desiredPlace={}
         for place in places:
             
-            if(searched['place_name'] == place["place_name"]):
+            if(searched['place_name'] in place["place_name"]):
               desiredPlace = place
               break
         

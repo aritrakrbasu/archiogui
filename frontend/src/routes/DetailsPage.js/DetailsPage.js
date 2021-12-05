@@ -4,28 +4,37 @@ import { useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Navbar from "../../Components/Navbar";
 import "./DetailsPage.css";
-import robotIcon from "./robot.png";
+import robotIcon from "./robot.svg";
+import robotIcon1 from "./robot1.gif";
 import axios from "axios";
-
+import background from "./background.svg";
 function DetailsPage() {
 	let { placeName } = useParams();
 	const [placeDetails, setPlaceDetails] = useState(null);
-	function playAudio() {
+	const [audioPlaying, setAudioPlaying] = useState(false);
+
+	function playAudio(message) {
 		var tts = window.speechSynthesis;
 		var voices = tts.getVoices();
 
-		var speak = new SpeechSynthesisUtterance(
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioepp Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioeppLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioeppLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hd"
-		);
-		if (voices[40].name === "Veena") speak.voice = voices[40];
-		tts.speak(speak);
+		var speak = new SpeechSynthesisUtterance(message);
+		if (voices[40]?.name === "Veena") speak.voice = voices[40];
+
+		if (audioPlaying) {
+			tts.cancel();
+		} else {
+			speak.rate = 0.8;
+			speak.lang = "en-US";
+			tts.speak(speak);
+		}
+
+		setAudioPlaying(!audioPlaying);
 	}
 
 	useEffect(() => {
-		console.log(placeName);
 		axios
 			.post("https://archiogui.herokuapp.com/findplace", {
-				place_name: placeName,
+				place_name: placeName.trim(),
 			})
 			.then((data) => {
 				console.log(data.data);
@@ -33,7 +42,7 @@ function DetailsPage() {
 			});
 	}, [placeName]);
 	return (
-		<Row className='pageWrap'>
+		<div className='pageWrap'>
 			<Col>
 				<Header />
 			</Col>
@@ -60,16 +69,28 @@ function DetailsPage() {
 								</div>
 							</div>
 						</div>
-						<div className='robotIcon' onClick={playAudio}>
-							<img src={robotIcon} />
+						{audioPlaying && (
+							<div
+								className='scifi'
+								onClick={() => playAudio(placeDetails.long_desc)}>
+								<img src={`${placeDetails.image}`} className='robotBig' />
+							</div>
+						)}
+						<div className={audioPlaying ? "floatingIcon" : "robotIcon"}>
+							<img
+								src={audioPlaying ? robotIcon1 : robotIcon}
+								className={audioPlaying ? "floatingRobotIcon" : "robotIco"}
+								onClick={() => playAudio(placeDetails.long_desc)}
+							/>
 						</div>
+
 						<div className='placeDetailsContainer'>
 							{placeDetails.long_desc}
 						</div>
 					</div>
 				)}
 			</Row>
-		</Row>
+		</div>
 	);
 }
 
