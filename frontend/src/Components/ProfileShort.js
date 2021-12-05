@@ -12,15 +12,18 @@ function ProfileShort() {
 
     return (
         <Row className="profileContainer">
-            <Col className="welcomeTextContainer">
-                <h1 className="welcomeText"> <span>Hello</span> {currentUser.displayName.split(' ')[0]} !</h1>
-                <p>The destination is not important the journey is</p>
+            <Col xs={8} className="welcomeTextContainer">
+                {" "}
+                <h1 className="welcomeText"> 
+                    <span>Hello</span> {currentUser.displayName.split(' ')[0]} !
+                </h1>
+                <p>The destination is not important the journey is!</p>
             </Col>
-            <Col className="imageHolder">
+            <Col xs={4} className="imageHolder">
                 <Link to="/profile">{(currentUser.profileImgURL!=null) ? (<img src={currentUser.profileImgURL} />):(<Jdenticon size="72" text={currentUser.displayName}/>)}</Link>
             </Col>
         </Row>
     )
 }
 
-export default ProfileShort
+export default ProfileShort;

@@ -1,18 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React from "react";
+import { Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-function PopularPlacesItem({image,place_name}) {
-    const uri = encodeURI(place_name)
+function PopularPlacesItem({ image, place_name }) {
+	const uri = encodeURI(place_name)
     return (
-        <Link to={`/place/${uri}`}>
-            <div className="placeItem" style={{backgroundImage:`URL(${image})`}}>
-                <div className="placeNameHolder">
-                    {place_name}
+        <Col xl={2} lg={2} xs={6} className='placeItemContainer'>
+            <Link to={`/place/${uri}`}>
+                <div className='placeItem' style={{ backgroundImage: `URL(${image})` }}>
+                    <div className='placeNameHolder'>{place_name}</div>
                 </div>
-            </div>
-        </Link>
-    )
+            </Link>
+        </Col>
+	);
 }
 
-export default PopularPlacesItem
+export default PopularPlacesItem;
