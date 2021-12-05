@@ -45,8 +45,16 @@ def findplace():
         places = doc.to_dict()["places"]
         desiredPlace={}
         for place in places:
-            if(place["place_name"].find(searched['place_name'])):
+            
+            if(searched['place_name'] == place["place_name"]):
               desiredPlace = place
               break
-        response = jsonify(desiredPlace)
-        return response
+        
+        if(bool(desiredPlace)):
+          response = jsonify(desiredPlace)
+          return response
+        else:
+          return "Record not found", 400
+
+if __name__ == "__main__":
+  app.run(debug=True)
