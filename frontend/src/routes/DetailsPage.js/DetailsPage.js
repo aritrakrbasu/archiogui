@@ -13,7 +13,9 @@ function DetailsPage() {
 		var tts = window.speechSynthesis;
 		var voices = tts.getVoices();
 
-		var speak = new SpeechSynthesisUtterance("hi bro Aritra");
+		var speak = new SpeechSynthesisUtterance(
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioepp Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioeppLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hdklf;l rkfoioeppLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim vnjcnldnvmvnmdn m;;l[jms hd"
+		);
 		if (voices[40].name === "Veena") speak.voice = voices[40];
 		tts.speak(speak);
 	}

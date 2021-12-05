@@ -1,5 +1,5 @@
 # Import files
-from flask import Flask , jsonify
+from flask import Flask , jsonify,request
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -35,11 +35,21 @@ def getallplaces():
         return response
     
 
-@app.route("/findplace", methods=["GET"] )
+@app.route("/findplace", methods=["POST"] )
 @cross_origin(origin='*',headers=['Content- Type','Authorization'])
 def findplace():
     places_ref = db.collection(u'places').document(u'all_places')
+    searched = request.json
     doc = places_ref.get()
     if doc.exists:
-        response = jsonify(doc.to_dict())
+        places = doc.to_dict()["places"]
+        desiredPlace={}
+        for place in places:
+            if(place["place_name"].find(searched['place_name'])):
+              desiredPlace = place
+              break
+        response = jsonify(desiredPlace)
         return response
+
+if __name__ == "__main__":
+  app.run(debug=True)
