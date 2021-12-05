@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth, db } from "../../firebase"
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, query, where } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "@firebase/auth"
 import { collection, setDoc } from "firebase/firestore";
 
@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
         updateProfile(user, {
           displayName: name,
         }).then((result)=>{
-            const userDocRef = setDoc(doc(db, 'users', user.uid), {
+            setDoc(doc(db, 'users', user.uid), {
                 displayName: name,
                 userId: user.uid,
                 email: email
@@ -39,36 +39,26 @@ export default function AuthProvider({ children }) {
 // user login
 function login(email, password) {
     return new Promise((resolve, reject) => {
-      db.collection("users").where("email","==",email).onSnapshot((docs)=>{
-        if(!docs.empty)
-        {
-          docs.forEach(doc=>{
-            if(doc.exists)
-            {
-                if(doc.data().isCollege === undefined && doc.data().isHr === undefined) 
-                {
-                  auth.signInWithEmailAndPassword(email, password).then(() => {
-                    resolve()
-                  })
-                  .catch(error => reject(error));
-                }
-                else
-                {
-                  reject({message:"Not registered as an user"})
-                }
-            }
-            else
-            {
-              reject({message:"no such account exists"})
-            }
-            })
+      const q = query(collection(db, "users"), where("email", "==", email));
+      onSnapshot(q, (docs) => {
+        console.log(docs)
+        if(!docs.empty) {
+          signInWithEmailAndPassword(auth, email, password).then(() => {
+            resolve()
+          }).catch(error => reject(error));
+        } else {
+          reject({message:"No registered user found with the given email"})
         }
-        else
-        {
-          reject({message:"no such account exists"})
-        }
+      }, (error) => {
+        reject({message: "Some error occured while logging in. Please try again."})
       })
     })
+  }
+
+  function logout() {
+    sessionStorage.clear();  
+    setCurrentUser()
+    return auth.signOut()
   }
 
   useEffect(() => {
@@ -76,7 +66,7 @@ function login(email, password) {
         if(user && user.uid) {
             const q = doc(db, "users", user.uid)
             var unsub = onSnapshot(q, (docs) => {
-                if(!docs.empty) {
+                if(docs.exists()) {
                     setCurrentUser(docs.data())
                     setLoading(false)
                 }
@@ -97,6 +87,7 @@ function login(email, password) {
   const value = {
     register,
     login,
+    logout,
     currentUser
   }
 

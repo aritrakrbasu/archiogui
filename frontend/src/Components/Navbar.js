@@ -5,8 +5,10 @@ import homeIcon from "./homeIcon.svg";
 import exploreIcon from "./exploreIcon.svg";
 import profileIcon from "./profileIcon.svg";
 import logoutIcon from "./logoutIcon.svg";
+import { useAuth } from './AuthProvider'
 import { Link } from "react-router-dom";
 function Navbar() {
+    const { logout } = useAuth();
 	return (
 		<ul className='navbarStyle'>
 			<Link to='/dashboard'>
@@ -46,13 +48,10 @@ function Navbar() {
 					Logout
 				</li>
 			</Link>
-			<Link to='/search'>
+			<Link to='/search' onClick={()=>logout()}>
 				<li className='d-icon'>
 					<img src={finderIcon} />
 				</li>
 			</Link>
 		</ul>
 	);
-}
-
-export default Navbar;

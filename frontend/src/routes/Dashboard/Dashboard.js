@@ -6,11 +6,15 @@ import PageHeader from "../../Components/PageHeader";
 import PlaceItem from "../../Components/PlaceItem";
 import PopularPlacesItem from "../../Components/PopularPlacesItem";
 import ProfileShort from "../../Components/ProfileShort";
+import { useAuth } from '../../Components/AuthProvider';
+import { useNavigate } from "react-router";
 import "./Dashboard.css";
 import axios from "axios";
 function Dashboard() {
 	const [placeDetails, setplaceDetails] = useState([]);
 	const [popularPlaces, setpopularPlaces] = useState([]);
+	const { currentUser } = useAuth();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios.get("https://archiogui.herokuapp.com/getallplaces").then((data) => {
@@ -33,6 +37,11 @@ function Dashboard() {
 
 		setpopularPlaces(randomPlaces);
 	}, [placeDetails]);
+
+	useEffect(()=>{
+		if(!currentUser)
+			navigate('/login');
+	}, [currentUser])
 
 	return (
 		<Container fluid className='pageContainer'>

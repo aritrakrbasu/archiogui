@@ -9,7 +9,7 @@ import robotIcon1 from "./robot1.gif";
 import axios from "axios";
 import background from "./background.svg";
 function DetailsPage() {
-	let { placeName } = useParams();
+	let { placename } = useParams();
 	const [placeDetails, setPlaceDetails] = useState(null);
 	const [audioPlaying, setAudioPlaying] = useState(false);
 
@@ -34,13 +34,13 @@ function DetailsPage() {
 	useEffect(() => {
 		axios
 			.post("https://archiogui.herokuapp.com/findplace", {
-				place_name: placeName.trim(),
+				place_name: placename.trim(),
 			})
 			.then((data) => {
 				console.log(data.data);
 				setPlaceDetails(data.data);
 			});
-	}, [placeName]);
+	}, [placename]);
 	return (
 		<div className='pageWrap'>
 			<Col>

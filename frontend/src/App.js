@@ -1,34 +1,44 @@
-import React from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Signup from "./routes/Signup/Signup";
-import Login from "./routes/Login/Login";
-import Forgetpwd from "./routes/Forgetpwd/Forgetpwd";
-import Dashboard from "./routes/Dashboard/Dashboard";
-import Explore from "./routes/Explore/Explore";
-import Profile from "./routes/Profile/Profile";
-import AuthProvider from "./Components/AuthProvider";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DetailsPage from "./routes/DetailsPage.js/DetailsPage";
+import React from 'react';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from './routes/Signup/Signup';
+import Login from './routes/Login/Login';
+import Forgetpwd from './routes/Forgetpwd/Forgetpwd';
+import Dashboard from './routes/Dashboard/Dashboard';
+import Explore from './routes/Explore/Explore';
+import Profile from './routes/Profile/Profile';
+import DetailsPage from './routes/DetailsPage/DetailsPage';
+import { useAuth } from './Components/AuthProvider'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import { Navigate } from 'react-router'
 
 function App() {
-	return (
-		<Router>
-			<AuthProvider>
-				<Routes>
-					<Route path='/' element={<Login />} />
-					<Route exact path='/login' element={<Login />} />
-					<Route exact path='/signup' element={<Signup />} />
-					<Route exact path='/dashboard' element={<Dashboard />} />
-					<Route exact path='/explore' element={<Explore />} />
-					<Route exact path='/profile' element={<Profile />} />
-					<Route path='/place' element={<DetailsPage />}>
-						<Route path=':placeName' element={<DetailsPage />} />
-					</Route>
-				</Routes>
-			</AuthProvider>
-		</Router>
-	);
+
+  const privateRoutes = [
+    {path: '/dashboard', element: <Dashboard/>}, 
+    {path: '/explore', element: <Explore/>}, 
+    {path: '/profile', element: <Profile />}, 
+    {path: '/place/:placename', element: <DetailsPage />}
+  ]
+
+  const {currentUser} = useAuth();
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />}/>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
+        {privateRoutes.map(privateRoute => 
+          <Route key={privateRoute.path} path={privateRoute.path} element={currentUser ? (privateRoute.element) : (<Navigate to="/login"/>)}/>
+        )}
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;
